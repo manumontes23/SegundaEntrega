@@ -1,0 +1,12 @@
+   {{>header}}
+   {{{listarCursos}}}
+    <form action="/curso" method="post">
+        <input type="number" name="id" placeholder="ID" required>
+        <input type="text" name="nombre" placeholder="nombre" required>
+        <input type="text" name="descripcion" placeholder="Descripcion" required>
+        <input type="number" name="valor" placeholder="valor" required>
+        <input type="text" name="modalidad" placeholder="modalidad">
+        <input type="number" name="duracion" placeholder="duracion">
+        <button>Registrar Curso</button>
+    </form>
+    {{>footer}}

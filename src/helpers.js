@@ -1,23 +1,67 @@
 const hbs=require('hbs');
+const cursos=require('./cursos.js')
 
-hbs.registerHelper('obtenerPromedio',(nota1,nota2,nota3)=>{
-    return (nota1+nota2+nota3)/3
+hbs.registerHelper('listarCursos',()=>{
+    listaCursos=require('../cursos.json')
+    let texto='<table>\<thead>\
+    <th>Nombre</th>\
+    <th>Descripcion</th>\
+    <th>Valor</th>\
+    </thead><tbody>'
+
+    listaCursos.forEach(element => {
+        texto=texto + " <tr onclick=><td> "+ element.nombre 
+        + "</td><td> "+ element.descripcion
+        +'</td><td> '+ element.valor+
+        '</tr>'
+
+    });
+    return texto+'</tdbody></table>'
 })
 
-hbs.registerHelper('listar',()=>{
-    listaEstudiantes=require('./listado.json')
-    let texto='<table>\<thead>\
-    <th>nombre</th>\
-    <th>Matematicas</th>\
-    <th>Ingles</th>\
-    <th>Programacion</th></thead><tbody>'
+hbs.registerHelper('listarCursosdisponibles',()=>{
+    
+    listarCursos=cursos.Disponibles()
 
-    listaEstudiantes.forEach(element => {
-        texto=texto + " <tr><td> "+ element.nombre 
-        + "</td><td> "+ element.matematicas
-        +'</td><td> '+ element.ingles+
-        '</td><td> '+ element.programacion
-        +'</td></tr>'
+    let texto='<table>\<thead>\
+    <th>id</th>\
+    <th>Nombre</th>\
+    <th>Descripcion</th>\
+    <th>Valor</th>\
+    </thead><tbody>'
+
+    listaCursos.forEach(element => {
+        texto=texto + " <tr><td> "+element.id+"</td><td>"+ element.nombre 
+        + "</td><td> "+ element.descripcion
+        +'</td><td> '+ element.valor+
+        '</tr>'
+
+    });
+    return texto+'</tdbody></table>'
+})
+hbs.registerHelper('InfoCurso',(id)=>{
+    let inscritos=cursos.inscritosCurso(id)
+    let curso=cursos.buscar(id)
+
+    let texto='<h2>'+curso.nombre+'</h2>\
+    <p><em>codigo: </em>'+curso.id+'\
+    <em>Descripcion: </em>'+curso.descripcion+'\
+    <em>Modalidad: </em>'+curso.modalidad+'\
+    <em>Estado: </em>'+curso.estadodo+'\
+    <em>Duracion: </em>'+curso.duracion+'\
+    <em>Valor: </em>'+curso.valor+'</p>\
+    <table><thead>\
+    <th>cedula</th>\
+    <th>Nombre</th>\
+    <th>Correo</th>\
+    <th>telefono</th>\
+    </thead><tbody>'
+
+    inscritos.forEach(element => {
+        texto=texto + " <tr><td> "+element.cedula+"</td><td>"+ element.nombre 
+        + "</td><td> "+ element.correo
+        +'</td><td> '+ element.telefono+
+        '</tr>'
 
     });
     return texto+'</tdbody></table>'
