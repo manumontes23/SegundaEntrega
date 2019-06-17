@@ -1,5 +1,8 @@
    {{>header}}
+   <h2>Lista de cursos</h2>
    {{{listarCursos}}}
+   <div>
+       <h2>Registrar Curso</h2>
     <form action="/curso" method="post">
         <input type="number" name="id" placeholder="ID" required>
         <input type="text" name="nombre" placeholder="nombre" required>
@@ -8,5 +11,11 @@
         <input type="text" name="modalidad" placeholder="modalidad">
         <input type="number" name="duracion" placeholder="duracion">
         <button>Registrar Curso</button>
+    </form>
+    </div>
+    <h2>Ver informacion de un curso</h2>
+      <form action="/curso" method="get">
+        <input type="number" name="id" placeholder="Id Curso" required>
+        <button>Ver informacion</button>
     </form>
     {{>footer}}

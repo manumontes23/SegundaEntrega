@@ -1,11 +1,12 @@
 {{header}}
-{{{listarCursosdisponibles}}}
+{{{verCurso id}}}
     <form action="/inscribir" method="post">
-        <input type="number" name="id" placeholder="Id Curso" required>
+        <input type="number" name="id" value={{id}} required>
         <input type="text" name="cedula" placeholder="cedula" required>
         <input type="text" name="nombre" placeholder="Nombre" required>
         <input type="text" name="correo" placeholder="correo electronico" required>
         <input type="text" name="tel" placeholder="telefono" required>
         <button>Inscribirme!</button>
     </form>
+
 {{footer}}

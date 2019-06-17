@@ -1,3 +1,6 @@
 {{>header}}
-{{{infoInfoCurso(id)}}}
+{{{InfoCurso id}}}
+<form action="/estado" method="post">
+    <button name="id" value={{id}}>Cambiar estado</button>
+    </form>
 {{>footer}}

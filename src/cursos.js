@@ -46,13 +46,17 @@ const guardar=()=>{
 
 
 
-const actualizar=(nom,asignatura,calificacion)=>{
+const cerrar=(id)=>{
     listar()
-    let estudiante =listaEstudiantes.find(buscar => buscar.nombre== nom)
-    if(!estudiante){
+    let curso =listaCursos.find(buscar => buscar.id== id)
+    if(!curso){
         console.log('no existe ese estudiante')
     }else{
-        estudiante[asignatura]=calificacion;
+        if(curso.estado=="Disponible"){
+            curso.estado="Cerrado"
+        }else{
+            curso.estado="Disponible"
+        }
         guardar()
     }
 }
@@ -72,7 +76,7 @@ const Disponibles=()=>{
     listar()
     
     let cursos=listaCursos.filter(buscar=>buscar.estado == "Disponible")
-    
+    console.log(cursos)
     return cursos
 }
 
@@ -101,7 +105,8 @@ const inscribir=(id,cedula,nom,correo,tel)=>{
         telefono:tel
     }
 
-    let duplicado=inscritos.find(buscar=>buscar.cedula==cedula && buscar.id==id)
+    let duplicado=inscritos.find(buscar=>(buscar.cedula==cedula && buscar.curso==id))
+    
     if(!duplicado){
         inscritos.push(nuevo)
         console.log('Estudiante Registrado')
@@ -133,6 +138,17 @@ const buscar=(id)=>{
     }
 }
 
+const eliminarAlumno=(id,cedula)=>{
+    listarIncritos()
+
+    let nuevo=inscritos.filter(buscar=>!(buscar.curso==id && buscar.cedula==cedula))
+
+    inscritos=nuevo
+    guardarCurso()
+    listarIncritos()
+    console.log(inscritos)
+}
+
 module.exports ={ 
     crear,
     Disponibles,
@@ -140,6 +156,8 @@ module.exports ={
     eliminar,
     inscritosCurso,
     inscribir,
-    buscar
+    buscar,
+    cerrar,
+    eliminarAlumno
 
 }
